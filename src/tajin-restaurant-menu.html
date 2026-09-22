@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مطعم طاجين - منيو إلكتروني فاخر</title>
+  <meta name="description" content="منيو إلكتروني تفاعلي وفاخر لمطعم طاجين للمشويات والأكل الشرقي">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0d0c;
+      --card-bg: #161311;
+      --card-hover: #1e1a16;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --gold: #d97706;
+      --text: #f5f5f4;
+      --text-muted: #a8a29e;
+      --border: #292524;
+      --border-accent: rgba(245, 158, 11, 0.3);
+      --emerald: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      padding-bottom: 90px;
+      line-height: 1.5;
+    }
+    h1, h2, h3, .font-alex { font-family: 'Alexandria', 'Cairo', sans-serif; }
+    .header {
+      background: linear-gradient(180deg, #181512 0%, #100e0c 100%);
+      border-bottom: 1px solid var(--border-accent);
+      padding: 24px 16px 16px;
+      text-align: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--amber);
+      border: 1px solid var(--border-accent);
+      border-radius: 9999px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .logo-box {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 10px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), #141210);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+    }
+    .search-box {
+      max-width: 500px;
+      margin: 16px auto 0;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: #171412;
+      border: 1px solid #332d27;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box input:focus { border-color: var(--amber); }
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(18, 16, 14, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #292524;
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .sticky-nav::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      background: #1c1815;
+      color: #d6d3d1;
+      border: 1px solid #2e2822;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn.active, .nav-btn:hover {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #0e0d0c;
+      border-color: #f59e0b;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+    .sec-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fef3c7;
+      margin: 28px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #292524;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--border-accent); }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+    .card-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+    .options-row {
+      display: flex;
+      gap: 6px;
+      margin: 14px 0 10px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .opt-btn {
+      flex: 1;
+      min-width: 70px;
+      background: #201c18;
+      border: 1px solid #2e2822;
+      border-radius: 10px;
+      padding: 6px 4px;
+      font-size: 11px;
+      color: #d6d3d1;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+    }
+    .opt-btn.active {
+      background: var(--amber);
+      color: #0e0d0c;
+      font-weight: 800;
+      border-color: #f59e0b;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid #241f1a;
+      margin-top: 10px;
+    }
+    .price { font-size: 18px; font-weight: 800; color: #fde68a; font-family: 'Alexandria', sans-serif; }
+    .add-btn {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #0e0d0c;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .floating-cart {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #0e0d0c;
+      padding: 14px 18px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 50;
+      display: none;
+    }
+    .cart-drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 60;
+      display: none;
+      justify-content: flex-end;
+    }
+    .cart-drawer-content {
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: #141210;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .footer {
+      text-align: center;
+      padding: 40px 16px 20px;
+      background: #090807;
+      border-top: 1px solid #292524;
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+    .credit-box {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fef08a;
+      margin: 16px 0;
+    }
+    .bg-watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      max-width: 90vw;
+      height: 580px;
+      max-height: 90vh;
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 0 35px #000);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Quiet Dark Watermark in Background -->
+  <div class="bg-watermark" aria-hidden="true">
+    <svg viewBox="0 0 500 500" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="sfTopCurve" d="M 100 250 A 155 155 0 0 1 400 250" fill="none" />
+        <path id="sfBottomCurve" d="M 390 270 A 155 155 0 0 1 110 270" fill="none" />
+      </defs>
+      <circle cx="250" cy="250" r="185" stroke="#dfba82" stroke-width="6.5" stroke-linecap="round" stroke-dasharray="420 30 180 30" stroke-dashoffset="120" />
+      <circle cx="250" cy="250" r="142" stroke="#dfba82" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="280 20 80 20" stroke-dashoffset="75" />
+      <text fill="#ffffff" font-size="24" font-weight="900" letter-spacing="4" font-family="sans-serif"><textPath href="#sfTopCurve" startOffset="50%" text-anchor="middle">ORIENTAL FOOD</textPath></text>
+      <text fill="#ffffff" font-size="20" font-weight="800" letter-spacing="3.5" font-family="sans-serif"><textPath href="#sfBottomCurve" startOffset="50%" text-anchor="middle">RESTAURANT &amp; CAFE</textPath></text>
+      <line x1="35" y1="250" x2="465" y2="175" stroke="#dfba82" stroke-width="6.5" stroke-linecap="round" />
+      <line x1="30" y1="345" x2="460" y2="270" stroke="#dfba82" stroke-width="6.5" stroke-linecap="round" />
+      <path d="M 65,320 C 85,270 145,230 195,245 C 175,285 140,320 85,328 C 75,330 65,328 65,320 Z" fill="#e8c48a" />
+      <ellipse cx="140" cy="275" rx="30" ry="16" transform="rotate(-15 140 275)" fill="#0e0d0c" />
+      <path d="M 180,245 C 190,195 210,165 220,150 C 223,145 228,146 226,152 C 220,172 202,215 190,246 Z" fill="#e8c48a" />
+      <path d="M 185,275 C 215,225 285,230 340,250 C 310,268 250,285 195,282 Z" fill="#e8c48a" />
+      <path d="M 245,255 C 275,235 320,240 338,252 C 320,270 275,285 240,285 C 230,285 225,270 245,255 Z" fill="#e8c48a" />
+      <path d="M 330,252 C 365,240 395,250 405,270 C 420,245 425,210 420,185 C 425,185 432,190 435,200 C 445,235 435,275 400,295 C 360,318 320,290 325,265 Z" fill="#e8c48a" />
+      <!-- Clear readable bold Arabic text طاجين -->
+      <g transform="rotate(-9.5 250 265)">
+        <text x="248" y="280" text-anchor="middle" fill="#e8c48a" font-size="74" font-weight="900" font-family="sans-serif">طاجين</text>
+      </g>
+      <rect x="105" y="268" width="26" height="26" transform="rotate(45 118 281)" fill="#ffffff" rx="3" />
+      <rect x="235" y="285" width="18" height="18" transform="rotate(45 244 294)" fill="#ffffff" rx="2" />
+      <rect x="248" y="302" width="18" height="18" transform="rotate(45 257 311)" fill="#ffffff" rx="2" />
+      <rect x="305" y="278" width="20" height="20" transform="rotate(45 315 288)" fill="#ffffff" rx="2" />
+    </svg>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-box">🔥</div>
+    <span class="badge">مطعم ومشويات طاجين</span>
+    <h1 style="font-size: 26px; font-weight: 900; color: #fff;">مطعم طاجين</h1>
+    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">أصل المشويات والأكل الشرقي الفاخر</p>
+    
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث عن صنفك المفضل... (كباب، كفتة، مكرونة...)" onkeyup="filterMenu()">
+    </div>
+  </header>
+
+  <!-- Sticky Nav -->
+  <nav class="sticky-nav">
+    <button class="nav-btn" onclick="scrollToSec('grills')">🔥 المشويات</button><button class="nav-btn" onclick="scrollToSec('sandwiches')">🥪 الساندوتشات</button><button class="nav-btn" onclick="scrollToSec('sides')">🍚 الأطباق الجانبية والمحاشي</button><button class="nav-btn" onclick="scrollToSec('beverages')">☕ المشروبات والقهوة</button>
+  </nav>
+
+  <!-- Menu Content -->
+  <main class="container" id="menuContainer">
+    
+        <section id="grills">
+          <h2 class="sec-title">🔥 المشويات</h2>
+          <div class="menu-grid">
+            
+              <div class="card" data-name="مشكل طاجين" data-desc="التشكيلة الملكية: كباب ضاني، ريش، كفتة، وطرب مع سلطات وعيش سخن">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مشكل طاجين</span>
+                    <span class="badge">توقيع طاجين 🔥</span>
+                  </div>
+                  <p class="card-desc">التشكيلة الملكية: كباب ضاني، ريش، كفتة، وطرب مع سلطات وعيش سخن</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-1">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-1', 'quarter', 275, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-1', 'third', 360, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-1', 'half', 530, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-1">275</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-1', 'مشكل طاجين')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مشكل فاخر" data-desc="مزيج راقٍ من الكباب الفلتو والريش الضاني الفاخرة مع الكفتة الخاصة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مشكل فاخر</span>
+                    <span class="badge">الأكثر طلباً ⭐</span>
+                  </div>
+                  <p class="card-desc">مزيج راقٍ من الكباب الفلتو والريش الضاني الفاخرة مع الكفتة الخاصة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-2">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-2', 'quarter', 260, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-2', 'third', 345, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-2', 'half', 510, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-2">260</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-2', 'مشكل فاخر')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مشكل مخصوص" data-desc="كباب وكفتة وطرب متبل مع قطع الشيش طاووق على الفحم">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مشكل مخصوص</span>
+                    
+                  </div>
+                  <p class="card-desc">كباب وكفتة وطرب متبل مع قطع الشيش طاووق على الفحم</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-3">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-3', 'quarter', 240, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-3', 'third', 320, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-3', 'half', 470, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-3">240</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-3', 'مشكل مخصوص')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مشكل سوبر" data-desc="تشكيلة مشويات سخنة مشوية بنار الحطب من كباب وكفتة وستيك ونفر مشكل">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مشكل سوبر</span>
+                    
+                  </div>
+                  <p class="card-desc">تشكيلة مشويات سخنة مشوية بنار الحطب من كباب وكفتة وستيك ونفر مشكل</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-4">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-4', 'quarter', 250, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-4', 'third', 330, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-4', 'half', 490, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-4">250</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-4', 'مشكل سوبر')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مشكل كباب وكفتة" data-desc="التوليفة الكلاسيكية المعشوقة من الكباب البلدي والكفتة المشوية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مشكل كباب وكفتة</span>
+                    <span class="badge">كلاسيك 👑</span>
+                  </div>
+                  <p class="card-desc">التوليفة الكلاسيكية المعشوقة من الكباب البلدي والكفتة المشوية</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-5">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-5', 'quarter', 225, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-5', 'third', 300, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-5', 'half', 440, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-5">225</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-5', 'مشكل كباب وكفتة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ريش ضاني" data-desc="ريش ضاني بلدي طازجة متبلة بماء البصل والأعشاب البرية مشوية بإتقان">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ريش ضاني</span>
+                    <span class="badge">طازج بلدي ✨</span>
+                  </div>
+                  <p class="card-desc">ريش ضاني بلدي طازجة متبلة بماء البصل والأعشاب البرية مشوية بإتقان</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-6">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-6', 'quarter', 290, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-6', 'third', 385, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-6', 'half', 570, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-6">290</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-6', 'ريش ضاني')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كباب ضاني" data-desc="قطع كباب ضاني تذوب في الفم بنكهة الفحم البلدي الأصيلة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كباب ضاني</span>
+                    
+                  </div>
+                  <p class="card-desc">قطع كباب ضاني تذوب في الفم بنكهة الفحم البلدي الأصيلة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-7">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-7', 'quarter', 280, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-7', 'third', 370, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-7', 'half', 550, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-7">280</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-7', 'كباب ضاني')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كباب فلتو كندوز" data-desc="أنعم قطع لحم الفلتو الكندوز البلدي بدون دهون غنية بالعصارة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كباب فلتو كندوز</span>
+                    <span class="badge">أعلى جودة 🥩</span>
+                  </div>
+                  <p class="card-desc">أنعم قطع لحم الفلتو الكندوز البلدي بدون دهون غنية بالعصارة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-8">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-8', 'quarter', 285, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-8', 'third', 375, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-8', 'half', 560, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-8">285</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-8', 'كباب فلتو كندوز')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كفتة ضاني" data-desc="كفتة لحم ضاني مفرومة مع ليّة بلدي وبهارات طاجين الخاصة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كفتة ضاني</span>
+                    <span class="badge">الأكثر شعبية ❤️</span>
+                  </div>
+                  <p class="card-desc">كفتة لحم ضاني مفرومة مع ليّة بلدي وبهارات طاجين الخاصة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-9">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-9', 'quarter', 180, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-9', 'third', 240, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-9', 'half', 350, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-9">180</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-9', 'كفتة ضاني')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="نيفا ضاني" data-desc="لحم ضاني مشوي ومكمور بالطريقة البدوية الشهيرة حتى النضج التام">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">نيفا ضاني</span>
+                    <span class="badge">تراث بدوي 🏜️</span>
+                  </div>
+                  <p class="card-desc">لحم ضاني مشوي ومكمور بالطريقة البدوية الشهيرة حتى النضج التام</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-10">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-10', 'quarter', 280, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-10', 'third', 370, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-10', 'half', 550, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-10">280</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-10', 'نيفا ضاني')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طرب مشوي" data-desc="كفتة بلدي محشوة داخل منديل الضاني المقرمش المشوي على الجمر">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طرب مشوي</span>
+                    <span class="badge">عشاق المنديل 🤤</span>
+                  </div>
+                  <p class="card-desc">كفتة بلدي محشوة داخل منديل الضاني المقرمش المشوي على الجمر</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-11">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-11', 'quarter', 210, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-11', 'third', 280, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-11', 'half', 410, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-11">210</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-11', 'طرب مشوي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كبدة مشوية على الفحم" data-desc="شرائح كبدة بلدي طازجة مشوية بخلطة الردة والثوم والكمون والليمون">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كبدة مشوية على الفحم</span>
+                    
+                  </div>
+                  <p class="card-desc">شرائح كبدة بلدي طازجة مشوية بخلطة الردة والثوم والكمون والليمون</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-12">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-12', 'quarter', 210, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-12', 'third', 280, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-12', 'half', 410, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-12">210</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-12', 'كبدة مشوية على الفحم')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="سجق بلدي مشوي" data-desc="سجق بلدي طازج بالخلطة الشرقية والبهارات الموزونة مشوي ومقرمش">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">سجق بلدي مشوي</span>
+                    
+                  </div>
+                  <p class="card-desc">سجق بلدي طازج بالخلطة الشرقية والبهارات الموزونة مشوي ومقرمش</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-13">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-13', 'quarter', 175, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-13', 'third', 235, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-13', 'half', 340, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-13">175</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-13', 'سجق بلدي مشوي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="استيك لحم مشوي" data-desc="شرائح ستيك لحم بقري بلدي طرية ومتبلة بالروزماري وزبدة الثوم">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">استيك لحم مشوي</span>
+                    
+                  </div>
+                  <p class="card-desc">شرائح ستيك لحم بقري بلدي طرية ومتبلة بالروزماري وزبدة الثوم</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-14">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-14', 'quarter', 260, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-14', 'third', 345, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-14', 'half', 510, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-14">260</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-14', 'استيك لحم مشوي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ممبار بلدي محمر" data-desc="ممبار بلدي محشو بخلطة الأرز بالخضار والطماطم المتبلة محمر بالدهن الخفيف">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ممبار بلدي محمر</span>
+                    <span class="badge">مقرمش ولذيذ 🌶️</span>
+                  </div>
+                  <p class="card-desc">ممبار بلدي محشو بخلطة الأرز بالخضار والطماطم المتبلة محمر بالدهن الخفيف</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-15">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-15', 'quarter', 120, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-15', 'third', 160, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-15', 'half', 230, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-15">120</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-15', 'ممبار بلدي محمر')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="شيش طاووق متبل" data-desc="أوراك دجاج متبلة بالزبادي والليمون والبهارات مشوية مع فلفل وبصل">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">شيش طاووق متبل</span>
+                    
+                  </div>
+                  <p class="card-desc">أوراك دجاج متبلة بالزبادي والليمون والبهارات مشوية مع فلفل وبصل</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-16">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-16', 'quarter', 140, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-16', 'third', 185, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-16', 'half', 270, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-16">140</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-16', 'شيش طاووق متبل')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="قطع صدور دجاج مشوية" data-desc="قطع صدور دجاج بيور متبلة بخلطة الأعشاب والزعتر والليمون">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">قطع صدور دجاج مشوية</span>
+                    
+                  </div>
+                  <p class="card-desc">قطع صدور دجاج بيور متبلة بخلطة الأعشاب والزعتر والليمون</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-17">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-17', 'quarter', 145, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-17', 'third', 190, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-17', 'half', 280, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-17">145</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-17', 'قطع صدور دجاج مشوية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="شرائح صدور مشوية (لايت)" data-desc="شرائح صدور مشوية خفيفة وصحية مناسبة للأنظمة الغذائية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">شرائح صدور مشوية (لايت)</span>
+                    <span class="badge">صحي & لايت 🥗</span>
+                  </div>
+                  <p class="card-desc">شرائح صدور مشوية خفيفة وصحية مناسبة للأنظمة الغذائية</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-18">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-18', 'quarter', 145, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-18', 'third', 190, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-18', 'half', 280, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-18">145</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-18', 'شرائح صدور مشوية (لايت)')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="فراخ بانيه مقرمشة" data-desc="صدور دجاج متبلة ومغلفة بطبقة كرسبي ذهبية ومقلية بزيت نقي">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">فراخ بانيه مقرمشة</span>
+                    
+                  </div>
+                  <p class="card-desc">صدور دجاج متبلة ومغلفة بطبقة كرسبي ذهبية ومقلية بزيت نقي</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-grill-19">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('grill-19', 'quarter', 140, this)">
+                        ¼ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-19', 'third', 185, this)">
+                        ⅓ كيلو
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('grill-19', 'half', 270, this)">
+                        ½ كيلو
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-grill-19">140</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('grill-19', 'فراخ بانيه مقرمشة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </section>
+      
+        <section id="sandwiches">
+          <h2 class="sec-title">🥪 الساندوتشات</h2>
+          <div class="menu-grid">
+            
+              <div class="card" data-name="ساندوتش كفتة مشوية" data-desc="أصابع كفتة بلدي مشوية على الفحم مع طحينة بيضاء وسلطة خضراء">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش كفتة مشوية</span>
+                    <span class="badge">الأكثر مبيعاً 🥪</span>
+                  </div>
+                  <p class="card-desc">أصابع كفتة بلدي مشوية على الفحم مع طحينة بيضاء وسلطة خضراء</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-1">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-1', 'baladi', 65, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-1', 'fino', 60, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-1">65</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-1', 'ساندوتش كفتة مشوية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش شيش طاووق" data-desc="قطع شيش طاووق جوسي مع الثومية ومخلل الخيار المقرمش">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش شيش طاووق</span>
+                    
+                  </div>
+                  <p class="card-desc">قطع شيش طاووق جوسي مع الثومية ومخلل الخيار المقرمش</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-2">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-2', 'baladi', 60, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-2', 'fino', 55, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-2">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-2', 'ساندوتش شيش طاووق')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش طرب فاخر" data-desc="طرب ضاني مقرمش مع صوص الطحينة وبقدونس مفروم بالليمون">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش طرب فاخر</span>
+                    <span class="badge">دسم ومميز 🤤</span>
+                  </div>
+                  <p class="card-desc">طرب ضاني مقرمش مع صوص الطحينة وبقدونس مفروم بالليمون</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-3">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-3', 'baladi', 75, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-3', 'fino', 70, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-3">75</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-3', 'ساندوتش طرب فاخر')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش سجق مشوي" data-desc="سجق بلدي بالبهارات والخلطة مع صوص الطحينة الحارة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش سجق مشوي</span>
+                    
+                  </div>
+                  <p class="card-desc">سجق بلدي بالبهارات والخلطة مع صوص الطحينة الحارة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-4">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-4', 'baladi', 60, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-4', 'fino', 55, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-4">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-4', 'ساندوتش سجق مشوي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش فراخ بانيه" data-desc="بانيه ذهبي مقرمش مع مايونيز وخس طازج وشرائح طماطم">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش فراخ بانيه</span>
+                    
+                  </div>
+                  <p class="card-desc">بانيه ذهبي مقرمش مع مايونيز وخس طازج وشرائح طماطم</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-5">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-5', 'fino', 55, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-5', 'baladi', 60, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-5">55</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-5', 'ساندوتش فراخ بانيه')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش استربس دجاج" data-desc="قطع استربس دجاج حار أو عادي مقرمشة مع صوص الرانش والجبن">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش استربس دجاج</span>
+                    <span class="badge">مقرمش حار 🌶️</span>
+                  </div>
+                  <p class="card-desc">قطع استربس دجاج حار أو عادي مقرمشة مع صوص الرانش والجبن</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-6">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-6', 'fino', 60, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-6', 'baladi', 65, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-6">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-6', 'ساندوتش استربس دجاج')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش كبدة مشوية" data-desc="شرائح كبدة متبلة بالثوم والليمون والفلفل الحار مع سلطة طحينة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش كبدة مشوية</span>
+                    
+                  </div>
+                  <p class="card-desc">شرائح كبدة متبلة بالثوم والليمون والفلفل الحار مع سلطة طحينة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-7">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-7', 'baladi', 70, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-7', 'fino', 65, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-7">70</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-7', 'ساندوتش كبدة مشوية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش صدور مشوية" data-desc="صدور دجاج متبلة مشوية دايت مع صوص خفيف وخضار مشوي">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش صدور مشوية</span>
+                    
+                  </div>
+                  <p class="card-desc">صدور دجاج متبلة مشوية دايت مع صوص خفيف وخضار مشوي</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-8">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-8', 'baladi', 60, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-8', 'fino', 55, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-8">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-8', 'ساندوتش صدور مشوية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="ساندوتش بطاطس بوم فريت" data-desc="بطاطس مقلية مقرمشة مع بهارات شرقية ومايونيز وكاتشب">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">ساندوتش بطاطس بوم فريت</span>
+                    
+                  </div>
+                  <p class="card-desc">بطاطس مقلية مقرمشة مع بهارات شرقية ومايونيز وكاتشب</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-9">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-9', 'fino', 30, this)">
+                        عيش فينو طازة
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-9', 'baladi', 35, this)">
+                        عيش بلدي سخن
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-9">30</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-9', 'ساندوتش بطاطس بوم فريت')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="حواوشي بلدي سادة" data-desc="لحم مفروم متبل بالبصل والفلفل داخل رغيف بلدي مقرمش على الجريل">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">حواوشي بلدي سادة</span>
+                    <span class="badge">رغيف مقرمش 🔥</span>
+                  </div>
+                  <p class="card-desc">لحم مفروم متبل بالبصل والفلفل داخل رغيف بلدي مقرمش على الجريل</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-10">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-10', 'baladi', 60, this)">
+                        عيش بلدي مقرمش
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-10', 'fino', 60, this)">
+                        عيش فينو حواوشي
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-10">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-10', 'حواوشي بلدي سادة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="حواوشي مكس جبن" data-desc="حواوشي بلدي غني بمكس جبنة موتزاريلا وشيدر ورومي سايحة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">حواوشي مكس جبن</span>
+                    <span class="badge">جبنة سايحة 🧀</span>
+                  </div>
+                  <p class="card-desc">حواوشي بلدي غني بمكس جبنة موتزاريلا وشيدر ورومي سايحة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-11">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-11', 'baladi', 75, this)">
+                        عيش بلدي مقرمش
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-11', 'fino', 75, this)">
+                        عيش فينو حواوشي
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-11">75</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-11', 'حواوشي مكس جبن')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="حواوشي سجق بلدي" data-desc="سجق بلدي متبل مع قطع فلفل ألوان وجبنة موتزاريلا في رغيف بلدي">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">حواوشي سجق بلدي</span>
+                    
+                  </div>
+                  <p class="card-desc">سجق بلدي متبل مع قطع فلفل ألوان وجبنة موتزاريلا في رغيف بلدي</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-sand-12">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('sand-12', 'baladi', 70, this)">
+                        عيش بلدي مقرمش
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('sand-12', 'fino', 70, this)">
+                        عيش فينو حواوشي
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-sand-12">70</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('sand-12', 'حواوشي سجق بلدي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </section>
+      
+        <section id="sides">
+          <h2 class="sec-title">🍚 الأطباق الجانبية والمحاشي</h2>
+          <div class="menu-grid">
+            
+              <div class="card" data-name="أرز مصري بالشعرية" data-desc="أرز مصري مفلفل بالسمن البلدي مع شعرية محمصة ذهبية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">أرز مصري بالشعرية</span>
+                    
+                  </div>
+                  <p class="card-desc">أرز مصري مفلفل بالسمن البلدي مع شعرية محمصة ذهبية</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-1">35</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-1', 'أرز مصري بالشعرية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="أرز مصري أبيض بالسمن" data-desc="أرز أبيض ناصع ومفلفل بالسمن البلدي الفاخر">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">أرز مصري أبيض بالسمن</span>
+                    
+                  </div>
+                  <p class="card-desc">أرز أبيض ناصع ومفلفل بالسمن البلدي الفاخر</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-2">35</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-2', 'أرز مصري أبيض بالسمن')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="أرز بسمتي أصفر كلاسيك" data-desc="أرز بسمتي حبة طويلة مطهو بالكركم والتوابل العطرية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">أرز بسمتي أصفر كلاسيك</span>
+                    
+                  </div>
+                  <p class="card-desc">أرز بسمتي حبة طويلة مطهو بالكركم والتوابل العطرية</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-3">45</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-3', 'أرز بسمتي أصفر كلاسيك')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="أرز بسمتي بالمكسرات" data-desc="أرز بسمتي متبل محمل باللوز المحمص والصنوبر والزبيب">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">أرز بسمتي بالمكسرات</span>
+                    <span class="badge">فاخر 🌰</span>
+                  </div>
+                  <p class="card-desc">أرز بسمتي متبل محمل باللوز المحمص والصنوبر والزبيب</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-4">65</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-4', 'أرز بسمتي بالمكسرات')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="أرز بسمتي بالخلطة وطاجين" data-desc="أرز بسمتي غني بكبد وقوانص متبلة ومكسرات محمصة بالكراميل">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">أرز بسمتي بالخلطة وطاجين</span>
+                    <span class="badge">الأكثر طلباً ⭐</span>
+                  </div>
+                  <p class="card-desc">أرز بسمتي غني بكبد وقوانص متبلة ومكسرات محمصة بالكراميل</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-5">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-5', 'أرز بسمتي بالخلطة وطاجين')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مكرونة ألفريدو دجاج وفطر" data-desc="فيتوتشيني بصوص الكريمة الغنية مع قطع الدجاج والمشروم وجبن بارميزان">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مكرونة ألفريدو دجاج وفطر</span>
+                    
+                  </div>
+                  <p class="card-desc">فيتوتشيني بصوص الكريمة الغنية مع قطع الدجاج والمشروم وجبن بارميزان</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-6">95</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-6', 'مكرونة ألفريدو دجاج وفطر')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طاجن مكرونة نجرسكو" data-desc="طاجن نجرسكو ساخن بالبشاميل الناعم وقطع الدجاج والجبن الموتزاريلا المحمر">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طاجن مكرونة نجرسكو</span>
+                    
+                  </div>
+                  <p class="card-desc">طاجن نجرسكو ساخن بالبشاميل الناعم وقطع الدجاج والجبن الموتزاريلا المحمر</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-7">90</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-7', 'طاجن مكرونة نجرسكو')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طاجن مكرونة بشاميل بلدي" data-desc="مكرونة فرن باللحمة المفرومة المعصجة وصوص البشاميل الكريمي الغني">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طاجن مكرونة بشاميل بلدي</span>
+                    <span class="badge">طاجن فرن 🫕</span>
+                  </div>
+                  <p class="card-desc">مكرونة فرن باللحمة المفرومة المعصجة وصوص البشاميل الكريمي الغني</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-side-8">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('side-8', 'small', 60, this)">
+                        طاجن صغير
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('side-8', 'large', 95, this)">
+                        طاجن كبير
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-8">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-8', 'طاجن مكرونة بشاميل بلدي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="خضار سوتيه طازج" data-desc="تشكيلة خضروات طازجة (كوسة، جزر، بروكلي، فاصوليا) مشوحة بزيت الزيتون">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">خضار سوتيه طازج</span>
+                    <span class="badge">صحي 🥦</span>
+                  </div>
+                  <p class="card-desc">تشكيلة خضروات طازجة (كوسة، جزر، بروكلي، فاصوليا) مشوحة بزيت الزيتون</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-9">40</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-9', 'خضار سوتيه طازج')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مكرونة وايت صوص كريمة" data-desc="بيني باستا غارقة في صوص الكريمة الإيطالية مع رشة بهارات إيطالية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مكرونة وايت صوص كريمة</span>
+                    
+                  </div>
+                  <p class="card-desc">بيني باستا غارقة في صوص الكريمة الإيطالية مع رشة بهارات إيطالية</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-10">65</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-10', 'مكرونة وايت صوص كريمة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="مكرونة ريد صوص شرقية" data-desc="مكرونة بصلصة الطماطم المسبكة بالثوم والريحان والبهارات الشرقية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">مكرونة ريد صوص شرقية</span>
+                    
+                  </div>
+                  <p class="card-desc">مكرونة بصلصة الطماطم المسبكة بالثوم والريحان والبهارات الشرقية</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-11">45</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-11', 'مكرونة ريد صوص شرقية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="سمبوسك مقلية ميكس جبن" data-desc="مثلثات سمبوسك مقرمشة محشوة بتوليفة جبنة موتزاريلا وفيتا وزعتر (4 قطع)">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">سمبوسك مقلية ميكس جبن</span>
+                    
+                  </div>
+                  <p class="card-desc">مثلثات سمبوسك مقرمشة محشوة بتوليفة جبنة موتزاريلا وفيتا وزعتر (4 قطع)</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-12">45</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-12', 'سمبوسك مقلية ميكس جبن')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="سمبوسك مقلية باللحم المفروم" data-desc="سمبوسك مقرمشة محشوة باللحمة المعصجة بالبصل والصنوبر (4 قطع)">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">سمبوسك مقلية باللحم المفروم</span>
+                    
+                  </div>
+                  <p class="card-desc">سمبوسك مقرمشة محشوة باللحمة المعصجة بالبصل والصنوبر (4 قطع)</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-13">50</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-13', 'سمبوسك مقلية باللحم المفروم')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="سمبوسك مشكل (جبن ولحم)" data-desc="تشكيلة مشكلة من سمبوسك الجبن واللحم المقرمشة الساخنة (6 قطع)">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">سمبوسك مشكل (جبن ولحم)</span>
+                    <span class="badge">توفير 🥟</span>
+                  </div>
+                  <p class="card-desc">تشكيلة مشكلة من سمبوسك الجبن واللحم المقرمشة الساخنة (6 قطع)</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-14">65</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-14', 'سمبوسك مشكل (جبن ولحم)')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كيلو محشي مشكل عائلي" data-desc="تشكيلة مشكلة من كوسة وباذنجان وفلفل بخلطة الأرز المصري بالصلصة والنعناع">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كيلو محشي مشكل عائلي</span>
+                    <span class="badge">عائلي 🍲</span>
+                  </div>
+                  <p class="card-desc">تشكيلة مشكلة من كوسة وباذنجان وفلفل بخلطة الأرز المصري بالصلصة والنعناع</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-15">160</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-15', 'كيلو محشي مشكل عائلي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كيلو محشي ورق عنب بالليمون" data-desc="ورق عنب بناتي ناعم ملفوف بإتقان ومطبوخ بدبس الرمان وشرائح الليمون">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كيلو محشي ورق عنب بالليمون</span>
+                    <span class="badge">ملكي 🍋</span>
+                  </div>
+                  <p class="card-desc">ورق عنب بناتي ناعم ملفوف بإتقان ومطبوخ بدبس الرمان وشرائح الليمون</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-16">190</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-16', 'كيلو محشي ورق عنب بالليمون')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كيلو محشي كرنب بلدي" data-desc="أصابع كرنب بلدي دايبة في الفم بخلطة الشبت والكزبرة والصلصة المسبكة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كيلو محشي كرنب بلدي</span>
+                    
+                  </div>
+                  <p class="card-desc">أصابع كرنب بلدي دايبة في الفم بخلطة الشبت والكزبرة والصلصة المسبكة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-17">150</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-17', 'كيلو محشي كرنب بلدي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طبق محشي ورق عنب فردي" data-desc="طبق مشهي من أصابع ورق العنب المتبلة بشرائح الليمون الساخن">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طبق محشي ورق عنب فردي</span>
+                    
+                  </div>
+                  <p class="card-desc">طبق مشهي من أصابع ورق العنب المتبلة بشرائح الليمون الساخن</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-18">55</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-18', 'طبق محشي ورق عنب فردي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طبق محشي مشكل فردي" data-desc="كوسة وباذنجان وفلفل محشي بخلطة طاجين السرية">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طبق محشي مشكل فردي</span>
+                    
+                  </div>
+                  <p class="card-desc">كوسة وباذنجان وفلفل محشي بخلطة طاجين السرية</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-19">50</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-19', 'طبق محشي مشكل فردي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طبق بطاطس بوم فريت مقلية" data-desc="أصابع بطاطس مقلية ذهبية مقرمشة مع ملح وبهارات خاصة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طبق بطاطس بوم فريت مقلية</span>
+                    
+                  </div>
+                  <p class="card-desc">أصابع بطاطس مقلية ذهبية مقرمشة مع ملح وبهارات خاصة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-side-20">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('side-20', 'small', 25, this)">
+                        طبق صغير
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('side-20', 'large', 40, this)">
+                        طبق كبير
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-20">25</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-20', 'طبق بطاطس بوم فريت مقلية')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="طبق مقبلات وسلطات مشكل" data-desc="طحينة بيضاء، بابا غنوج، ثومية، مخلل بلدي مشكل، وسلطة خضراء بلدي">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">طبق مقبلات وسلطات مشكل</span>
+                    <span class="badge">لا غنى عنه 🥗</span>
+                  </div>
+                  <p class="card-desc">طحينة بيضاء، بابا غنوج، ثومية، مخلل بلدي مشكل، وسلطة خضراء بلدي</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-side-21">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('side-21', 'medium', 40, this)">
+                        طبق وسط
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('side-21', 'large', 65, this)">
+                        طبق كبير عائلي
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-21">40</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-21', 'طبق مقبلات وسلطات مشكل')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="صينية رقاق بلدي باللحمة والقشطة" data-desc="صينية رقاق مورقة بالسمن الفلاحي والقشطة محشوة لحم بلدي معصج مقرمشة من فوق وطرية من جوه">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">صينية رقاق بلدي باللحمة والقشطة</span>
+                    <span class="badge">توقيع الشيف 👑</span>
+                  </div>
+                  <p class="card-desc">صينية رقاق مورقة بالسمن الفلاحي والقشطة محشوة لحم بلدي معصج مقرمشة من فوق وطرية من جوه</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-side-22">180</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('side-22', 'صينية رقاق بلدي باللحمة والقشطة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </section>
+      
+        <section id="beverages">
+          <h2 class="sec-title">☕ المشروبات والقهوة</h2>
+          <div class="menu-grid">
+            
+              <div class="card" data-name="إسبريسو إيطالي" data-desc="شوت قهوة مركز غني بالكريمة والنكهة القوية من حبوب البن المحمصة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">إسبريسو إيطالي</span>
+                    <span class="badge">قهوة ساخنة ☕</span>
+                  </div>
+                  <p class="card-desc">شوت قهوة مركز غني بالكريمة والنكهة القوية من حبوب البن المحمصة</p>
+                </div>
+
+                <div>
+                  
+                  <div class="options-row" id="opts-bev-1">
+                    
+                      <button class="opt-btn active" 
+                        onclick="selectOpt('bev-1', 'single', 30, this)">
+                        سنجل (Single)
+                      </button>
+                    
+                      <button class="opt-btn " 
+                        onclick="selectOpt('bev-1', 'double', 42, this)">
+                        دوبل (Double)
+                      </button>
+                    
+                  </div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-1">30</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-1', 'إسبريسو إيطالي')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كابتشينو دوبل" data-desc="إسبريسو دوبل مع حليب مبخر ورغوة حليب كريمية كثيفة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كابتشينو دوبل</span>
+                    
+                  </div>
+                  <p class="card-desc">إسبريسو دوبل مع حليب مبخر ورغوة حليب كريمية كثيفة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-2">55</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-2', 'كابتشينو دوبل')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="كافيه لاتيه دوبل" data-desc="إسبريسو غني مع حليب ساخن ناعم ورغوة خفيفة متوازنة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">كافيه لاتيه دوبل</span>
+                    
+                  </div>
+                  <p class="card-desc">إسبريسو غني مع حليب ساخن ناعم ورغوة خفيفة متوازنة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-3">55</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-3', 'كافيه لاتيه دوبل')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="آيس لاتيه منعش" data-desc="إسبريسو مثلج مع حليب بارد ومكعبات ثلج منعشة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">آيس لاتيه منعش</span>
+                    <span class="badge">منعش مثلج 🧊</span>
+                  </div>
+                  <p class="card-desc">إسبريسو مثلج مع حليب بارد ومكعبات ثلج منعشة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-4">60</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-4', 'آيس لاتيه منعش')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="آيس نسكافيه رغوة" data-desc="نسكافيه مخفوق برغوة ذهبية غنية مع حليب مثلج وسكر حسب الرغبة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">آيس نسكافيه رغوة</span>
+                    
+                  </div>
+                  <p class="card-desc">نسكافيه مخفوق برغوة ذهبية غنية مع حليب مثلج وسكر حسب الرغبة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-5">50</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-5', 'آيس نسكافيه رغوة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="card" data-name="آيس موكا بالشوكولاتة" data-desc="مزيج الإسبريسو وصوص الشوكولاتة الفاخر مع حليب مثلج وكريمة مخفوقة">
+                <div>
+                  <div class="card-top">
+                    <span class="card-title font-alex">آيس موكا بالشوكولاتة</span>
+                    <span class="badge">شوكولاتة 🍫</span>
+                  </div>
+                  <p class="card-desc">مزيج الإسبريسو وصوص الشوكولاتة الفاخر مع حليب مثلج وكريمة مخفوقة</p>
+                </div>
+
+                <div>
+                  
+
+                  <div class="card-footer">
+                    <div>
+                      <span style="font-size: 10px; color: var(--text-muted); display: block;">السعر</span>
+                      <span class="price" id="price-bev-6">65</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-weight: bold;">ج.م</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('bev-6', 'آيس موكا بالشوكولاتة')">
+                      + أضف للطلب
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </section>
+      
+  </main>
+
+  <!-- Floating Cart -->
+  <div class="floating-cart" id="floatingCart" onclick="toggleCart(true)">
+    <span>🛒 سلة الطلبات (<span id="cartCount">0</span> أصناف)</span>
+    <span>إتمام الطلب بالواتساب &larr;</span>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 18px; font-weight: 800; color: #fde68a;">سلة الطلبات</h3>
+        <button onclick="toggleCart(false)" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">رقم الطاولة / أو نوع الاستلام:</label>
+        <input type="text" id="orderNoteInput" placeholder="مثال: طاولة 5 أو تيك أواي" style="width: 100%; background: #1c1815; border: 1px solid #332d27; color: #fff; padding: 10px; border-radius: 10px; font-family: inherit; font-size: 13px;">
+      </div>
+
+      <div id="cartItemsList" style="flex: 1; overflow-y: auto;"></div>
+
+      <div style="border-top: 1px solid #292524; padding-top: 16px; margin-top: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 900; margin-bottom: 14px;">
+          <span>الإجمالي:</span>
+          <span style="color: #fde68a;"><span id="cartTotal">0</span> ج.م</span>
+        </div>
+        <button onclick="sendOrderWhatsApp()" style="width: 100%; background: #10b981; color: #fff; border: none; padding: 14px; border-radius: 14px; font-size: 15px; font-weight: 900; cursor: pointer; font-family: inherit;">
+          💬 إرسال الطلب عبر واتساب المطعم (01000229291)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <h3 style="color: #fff; font-size: 20px; font-weight: 800;">مطعم طاجين</h3>
+    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📍 كورنيش النيل امام سور النادي الرياضي بجوار جيم ال VIB</p>
+    <p style="font-size: 12px; color: #f59e0b; margin-top: 2px;">📞 هاتف / واتساب: 01000229291</p>
+    
+    <div class="credit-box">
+      <div>تم التطوير بواسطة مروان لهم ❤️</div>
+      <div style="margin-top: 8px;">
+        <a href="https://wa.me/201159615794?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%8A%D8%B9%D8%AC%D8%A8%D9%86%D9%8A%20%D8%AC%D8%AF%D8%A7%20%D8%B4%D8%BA%D9%84%D9%83%D9%85%20%D9%85%D9%85%D9%83%D9%86%20%D8%AA%D9%81%D8%A7%D8%B5%D9%8A%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7" target="_blank" style="color: #6ee7b7; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+          💬 تواصل مع المطور عبر الواتساب: <span dir="ltr">01159615794</span>
+        </a>
+      </div>
+    </div>
+
+    <p style="font-size: 11px; color: #78716c; margin-top: 8px;">
+      جميع الحقوق محفوظة © 2026 مطعم طاجين
+    </p>
+  </footer>
+
+  <script>
+    const itemsData = [{"id":"grill-1","name":"مشكل طاجين","options":[{"id":"quarter","name":"¼ كيلو","price":275},{"id":"third","name":"⅓ كيلو","price":360,"isDefault":true},{"id":"half","name":"½ كيلو","price":530}]},{"id":"grill-2","name":"مشكل فاخر","options":[{"id":"quarter","name":"¼ كيلو","price":260},{"id":"third","name":"⅓ كيلو","price":345,"isDefault":true},{"id":"half","name":"½ كيلو","price":510}]},{"id":"grill-3","name":"مشكل مخصوص","options":[{"id":"quarter","name":"¼ كيلو","price":240},{"id":"third","name":"⅓ كيلو","price":320,"isDefault":true},{"id":"half","name":"½ كيلو","price":470}]},{"id":"grill-4","name":"مشكل سوبر","options":[{"id":"quarter","name":"¼ كيلو","price":250},{"id":"third","name":"⅓ كيلو","price":330,"isDefault":true},{"id":"half","name":"½ كيلو","price":490}]},{"id":"grill-5","name":"مشكل كباب وكفتة","options":[{"id":"quarter","name":"¼ كيلو","price":225},{"id":"third","name":"⅓ كيلو","price":300,"isDefault":true},{"id":"half","name":"½ كيلو","price":440}]},{"id":"grill-6","name":"ريش ضاني","options":[{"id":"quarter","name":"¼ كيلو","price":290},{"id":"third","name":"⅓ كيلو","price":385,"isDefault":true},{"id":"half","name":"½ كيلو","price":570}]},{"id":"grill-7","name":"كباب ضاني","options":[{"id":"quarter","name":"¼ كيلو","price":280},{"id":"third","name":"⅓ كيلو","price":370,"isDefault":true},{"id":"half","name":"½ كيلو","price":550}]},{"id":"grill-8","name":"كباب فلتو كندوز","options":[{"id":"quarter","name":"¼ كيلو","price":285},{"id":"third","name":"⅓ كيلو","price":375,"isDefault":true},{"id":"half","name":"½ كيلو","price":560}]},{"id":"grill-9","name":"كفتة ضاني","options":[{"id":"quarter","name":"¼ كيلو","price":180},{"id":"third","name":"⅓ كيلو","price":240,"isDefault":true},{"id":"half","name":"½ كيلو","price":350}]},{"id":"grill-10","name":"نيفا ضاني","options":[{"id":"quarter","name":"¼ كيلو","price":280},{"id":"third","name":"⅓ كيلو","price":370,"isDefault":true},{"id":"half","name":"½ كيلو","price":550}]},{"id":"grill-11","name":"طرب مشوي","options":[{"id":"quarter","name":"¼ كيلو","price":210},{"id":"third","name":"⅓ كيلو","price":280,"isDefault":true},{"id":"half","name":"½ كيلو","price":410}]},{"id":"grill-12","name":"كبدة مشوية على الفحم","options":[{"id":"quarter","name":"¼ كيلو","price":210},{"id":"third","name":"⅓ كيلو","price":280,"isDefault":true},{"id":"half","name":"½ كيلو","price":410}]},{"id":"grill-13","name":"سجق بلدي مشوي","options":[{"id":"quarter","name":"¼ كيلو","price":175},{"id":"third","name":"⅓ كيلو","price":235,"isDefault":true},{"id":"half","name":"½ كيلو","price":340}]},{"id":"grill-14","name":"استيك لحم مشوي","options":[{"id":"quarter","name":"¼ كيلو","price":260},{"id":"third","name":"⅓ كيلو","price":345,"isDefault":true},{"id":"half","name":"½ كيلو","price":510}]},{"id":"grill-15","name":"ممبار بلدي محمر","options":[{"id":"quarter","name":"¼ كيلو","price":120},{"id":"third","name":"⅓ كيلو","price":160,"isDefault":true},{"id":"half","name":"½ كيلو","price":230}]},{"id":"grill-16","name":"شيش طاووق متبل","options":[{"id":"quarter","name":"¼ كيلو","price":140},{"id":"third","name":"⅓ كيلو","price":185,"isDefault":true},{"id":"half","name":"½ كيلو","price":270}]},{"id":"grill-17","name":"قطع صدور دجاج مشوية","options":[{"id":"quarter","name":"¼ كيلو","price":145},{"id":"third","name":"⅓ كيلو","price":190,"isDefault":true},{"id":"half","name":"½ كيلو","price":280}]},{"id":"grill-18","name":"شرائح صدور مشوية (لايت)","options":[{"id":"quarter","name":"¼ كيلو","price":145},{"id":"third","name":"⅓ كيلو","price":190,"isDefault":true},{"id":"half","name":"½ كيلو","price":280}]},{"id":"grill-19","name":"فراخ بانيه مقرمشة","options":[{"id":"quarter","name":"¼ كيلو","price":140},{"id":"third","name":"⅓ كيلو","price":185,"isDefault":true},{"id":"half","name":"½ كيلو","price":270}]},{"id":"sand-1","name":"ساندوتش كفتة مشوية","options":[{"id":"baladi","name":"عيش بلدي سخن","price":65,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":60}]},{"id":"sand-2","name":"ساندوتش شيش طاووق","options":[{"id":"baladi","name":"عيش بلدي سخن","price":60,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":55}]},{"id":"sand-3","name":"ساندوتش طرب فاخر","options":[{"id":"baladi","name":"عيش بلدي سخن","price":75,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":70}]},{"id":"sand-4","name":"ساندوتش سجق مشوي","options":[{"id":"baladi","name":"عيش بلدي سخن","price":60,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":55}]},{"id":"sand-5","name":"ساندوتش فراخ بانيه","options":[{"id":"fino","name":"عيش فينو طازة","price":55,"isDefault":true},{"id":"baladi","name":"عيش بلدي سخن","price":60}]},{"id":"sand-6","name":"ساندوتش استربس دجاج","options":[{"id":"fino","name":"عيش فينو طازة","price":60,"isDefault":true},{"id":"baladi","name":"عيش بلدي سخن","price":65}]},{"id":"sand-7","name":"ساندوتش كبدة مشوية","options":[{"id":"baladi","name":"عيش بلدي سخن","price":70,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":65}]},{"id":"sand-8","name":"ساندوتش صدور مشوية","options":[{"id":"baladi","name":"عيش بلدي سخن","price":60,"isDefault":true},{"id":"fino","name":"عيش فينو طازة","price":55}]},{"id":"sand-9","name":"ساندوتش بطاطس بوم فريت","options":[{"id":"fino","name":"عيش فينو طازة","price":30,"isDefault":true},{"id":"baladi","name":"عيش بلدي سخن","price":35}]},{"id":"sand-10","name":"حواوشي بلدي سادة","options":[{"id":"baladi","name":"عيش بلدي مقرمش","price":60,"isDefault":true},{"id":"fino","name":"عيش فينو حواوشي","price":60}]},{"id":"sand-11","name":"حواوشي مكس جبن","options":[{"id":"baladi","name":"عيش بلدي مقرمش","price":75,"isDefault":true},{"id":"fino","name":"عيش فينو حواوشي","price":75}]},{"id":"sand-12","name":"حواوشي سجق بلدي","options":[{"id":"baladi","name":"عيش بلدي مقرمش","price":70,"isDefault":true},{"id":"fino","name":"عيش فينو حواوشي","price":70}]},{"id":"side-1","name":"أرز مصري بالشعرية","options":[{"id":"std","name":"طبق فردي","price":35,"isDefault":true}]},{"id":"side-2","name":"أرز مصري أبيض بالسمن","options":[{"id":"std","name":"طبق فردي","price":35,"isDefault":true}]},{"id":"side-3","name":"أرز بسمتي أصفر كلاسيك","options":[{"id":"std","name":"طبق فردي","price":45,"isDefault":true}]},{"id":"side-4","name":"أرز بسمتي بالمكسرات","options":[{"id":"std","name":"طبق فردي فاخر","price":65,"isDefault":true}]},{"id":"side-5","name":"أرز بسمتي بالخلطة وطاجين","options":[{"id":"std","name":"طبق فردي غني","price":60,"isDefault":true}]},{"id":"side-6","name":"مكرونة ألفريدو دجاج وفطر","options":[{"id":"std","name":"طبق رئيسي","price":95,"isDefault":true}]},{"id":"side-7","name":"طاجن مكرونة نجرسكو","options":[{"id":"std","name":"طاجن سخن","price":90,"isDefault":true}]},{"id":"side-8","name":"طاجن مكرونة بشاميل بلدي","options":[{"id":"small","name":"طاجن صغير","price":60,"isDefault":true},{"id":"large","name":"طاجن كبير","price":95}]},{"id":"side-9","name":"خضار سوتيه طازج","options":[{"id":"std","name":"طبق","price":40,"isDefault":true}]},{"id":"side-10","name":"مكرونة وايت صوص كريمة","options":[{"id":"std","name":"طبق","price":65,"isDefault":true}]},{"id":"side-11","name":"مكرونة ريد صوص شرقية","options":[{"id":"std","name":"طبق","price":45,"isDefault":true}]},{"id":"side-12","name":"سمبوسك مقلية ميكس جبن","options":[{"id":"std","name":"طبق (4 قطع)","price":45,"isDefault":true}]},{"id":"side-13","name":"سمبوسك مقلية باللحم المفروم","options":[{"id":"std","name":"طبق (4 قطع)","price":50,"isDefault":true}]},{"id":"side-14","name":"سمبوسك مشكل (جبن ولحم)","options":[{"id":"std","name":"طبق (6 قطع)","price":65,"isDefault":true}]},{"id":"side-15","name":"كيلو محشي مشكل عائلي","options":[{"id":"std","name":"1 كيلو","price":160,"isDefault":true}]},{"id":"side-16","name":"كيلو محشي ورق عنب بالليمون","options":[{"id":"std","name":"1 كيلو","price":190,"isDefault":true}]},{"id":"side-17","name":"كيلو محشي كرنب بلدي","options":[{"id":"std","name":"1 كيلو","price":150,"isDefault":true}]},{"id":"side-18","name":"طبق محشي ورق عنب فردي","options":[{"id":"std","name":"طبق فردي","price":55,"isDefault":true}]},{"id":"side-19","name":"طبق محشي مشكل فردي","options":[{"id":"std","name":"طبق فردي","price":50,"isDefault":true}]},{"id":"side-20","name":"طبق بطاطس بوم فريت مقلية","options":[{"id":"small","name":"طبق صغير","price":25,"isDefault":true},{"id":"large","name":"طبق كبير","price":40}]},{"id":"side-21","name":"طبق مقبلات وسلطات مشكل","options":[{"id":"medium","name":"طبق وسط","price":40,"isDefault":true},{"id":"large","name":"طبق كبير عائلي","price":65}]},{"id":"side-22","name":"صينية رقاق بلدي باللحمة والقشطة","options":[{"id":"std","name":"صينية عائلية كاملة","price":180,"isDefault":true}]},{"id":"bev-1","name":"إسبريسو إيطالي","options":[{"id":"single","name":"سنجل (Single)","price":30,"isDefault":true},{"id":"double","name":"دوبل (Double)","price":42}]},{"id":"bev-2","name":"كابتشينو دوبل","options":[{"id":"std","name":"حجم دوبل","price":55,"isDefault":true}]},{"id":"bev-3","name":"كافيه لاتيه دوبل","options":[{"id":"std","name":"حجم دوبل","price":55,"isDefault":true}]},{"id":"bev-4","name":"آيس لاتيه منعش","options":[{"id":"std","name":"كوب بارد منعش","price":60,"isDefault":true}]},{"id":"bev-5","name":"آيس نسكافيه رغوة","options":[{"id":"std","name":"كوب بارد مثلج","price":50,"isDefault":true}]},{"id":"bev-6","name":"آيس موكا بالشوكولاتة","options":[{"id":"std","name":"كوب بارد غني","price":65,"isDefault":true}]}];
+
+    let cart = [];
+    let selectedOptions = {};
+
+    itemsData.forEach(item => {
+      selectedOptions[item.id] = item.options[0];
+    });
+
+    function selectOpt(itemId, optId, price, btn) {
+      const item = itemsData.find(i => i.id === itemId);
+      const opt = item.options.find(o => o.id === optId);
+      selectedOptions[itemId] = opt;
+      document.getElementById('price-' + itemId).innerText = price;
+      
+      const parent = document.getElementById('opts-' + itemId);
+      parent.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function addToCart(itemId, itemName) {
+      const opt = selectedOptions[itemId];
+      const cartId = itemId + '-' + opt.id;
+      const exist = cart.find(c => c.cartId === cartId);
+      if (exist) {
+        exist.qty++;
+      } else {
+        cart.push({ cartId, itemId, name: itemName, optName: opt.name, price: opt.price, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((s, i) => s + i.qty, 0);
+      const totalPrice = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      
+      document.getElementById('cartCount').innerText = totalCount;
+      document.getElementById('cartTotal').innerText = totalPrice;
+      
+      const floatBar = document.getElementById('floatingCart');
+      floatBar.style.display = totalCount > 0 ? 'flex' : 'none';
+
+      const list = document.getElementById('cartItemsList');
+      if (cart.length === 0) {
+        list.innerHTML = '<p style="color: #78716c; text-align: center; margin-top: 40px;">السلة فارغة</p>';
+      } else {
+        list.innerHTML = cart.map((i, idx) => `
+          <div style="background: #1c1815; padding: 10px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 700; color: #fff;">${i.name}</div>
+              <div style="font-size: 11px; color: var(--amber);">${i.optName} (${i.price} ج.م)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button onclick="changeQty(${idx}, -1)" style="width: 26px; height: 26px; background: #2e2822; color: #fff; border: none; border-radius: 6px; cursor: pointer;">-</button>
+              <span style="font-weight: 800; font-size: 13px;">${i.qty}</span>
+              <button onclick="changeQty(${idx}, 1)" style="width: 26px; height: 26px; background: var(--amber); color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: 800;">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function changeQty(idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateCartUI();
+    }
+
+    function toggleCart(show) {
+      document.getElementById('cartDrawer').style.display = show ? 'flex' : 'none';
+    }
+
+    function scrollToSec(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterMenu() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.card').forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const desc = card.getAttribute('data-desc').toLowerCase();
+        card.style.display = (name.includes(q) || desc.includes(q)) ? 'flex' : 'none';
+      });
+    }
+
+    function sendOrderWhatsApp() {
+      if (cart.length === 0) return;
+      const note = document.getElementById('orderNoteInput').value || 'غير محدد';
+      const totalPrice = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      
+      let msg = '🍽️ *طلب جديد من منيو مطعم طاجين*\n';
+      msg += '━━━━━━━━━━━━━━━━━━━━━\n';
+      msg += '📍 *بيانات الطلب:* ' + note + '\n';
+      msg += '📋 *الأصناف:*\n\n';
+      
+      cart.forEach((i, idx) => {
+        msg += (idx + 1) + '. *' + i.name + '* (' + i.optName + ')\n';
+        msg += '   الكمية: ' + i.qty + ' × ' + i.price + ' ج.م = ' + (i.qty * i.price) + ' ج.م\n';
+      });
+      
+      msg += '━━━━━━━━━━━━━━━━━━━━━\n';
+      msg += '💰 *الإجمالي الكلي:* *' + totalPrice + ' ج.م*\n';
+      msg += '✨ شكراً لاختياركم *مطعم طاجين*!';
+
+      const encoded = encodeURIComponent(msg);
+      window.open('https://wa.me/201000229291?text=' + encoded, '_blank');
+    }
+  </script>
+</body>
+</html>
