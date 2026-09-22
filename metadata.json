@@ -1,0 +1,6 @@
+{
+  "name": "منيو مطعم طاجين الفاخر",
+  "description": "منيو إلكتروني تفاعلي وفاخر لمطعم طاجين للمشويات والأكل الشرقي متوافق مع مسح الـ QR والهواتف الذكية مع سلة طلبات وواتساب",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, .font-alexandria {
+    font-family: 'Alexandria', 'Cairo', sans-serif;
+  }
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141210;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #383129;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c2882f;
+}
+
+/* Hide scrollbar for horizontal categories while maintaining swipeability */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
