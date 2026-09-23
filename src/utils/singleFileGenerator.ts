@@ -413,7 +413,9 @@ export function generateStandaloneSingleHtml(): string {
   <!-- Footer -->
   <footer class="footer">
     <h3 style="color: #fff; font-size: 20px; font-weight: 800;">${RESTAURANT_INFO.name}</h3>
-    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📍 ${RESTAURANT_INFO.address}</p>
+    <p style="font-size: 12px; margin-top: 4px;">
+      <a href="${RESTAURANT_INFO.googleMapsUrl}" target="_blank" style="color: #fbbf24; text-decoration: none;">📍 ${RESTAURANT_INFO.address} (خرائط Google ↗)</a>
+    </p>
     <p style="font-size: 12px; color: #f59e0b; margin-top: 2px;">📞 هاتف / واتساب: ${RESTAURANT_INFO.phone}</p>
     
     <div class="credit-box">

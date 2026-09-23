@@ -20,21 +20,38 @@ export function generateWhatsAppMessage(
   message += `📅 *الوقت:* ${dateStr}\n`;
 
   if (orderDetails.orderType === 'hall') {
-    message += `📍 *نوع الطلب:* داخل الصالة (طاولة رقم ${orderDetails.tableNumber || 'غير محدد'})\n`;
-  } else if (orderDetails.orderType === 'takeaway') {
-    message += `🥡 *نوع الطلب:* تيك أواي (استلام من المطعم)\n`;
-  } else {
-    message += `🛵 *نوع الطلب:* دليفري (توصيل منازل)\n`;
-    if (orderDetails.deliveryAddress) {
-      message += `🏠 *العنوان:* ${orderDetails.deliveryAddress}\n`;
+    message += `📍 *نوع الطلب:* 🍽️ داخل الصالة (طاولة رقم ${orderDetails.tableNumber || 'غير محدد'})\n`;
+    if (orderDetails.customerName) {
+      message += `👤 *اسم العميل:* ${orderDetails.customerName}\n`;
     }
-  }
-
-  if (orderDetails.customerName) {
-    message += `👤 *العميل:* ${orderDetails.customerName}\n`;
-  }
-  if (orderDetails.customerPhone) {
-    message += `📞 *الهاتف:* ${orderDetails.customerPhone}\n`;
+    if (orderDetails.customerPhone) {
+      message += `📞 *رقم التليفون:* ${orderDetails.customerPhone}\n`;
+    }
+  } else if (orderDetails.orderType === 'takeaway') {
+    message += `📍 *نوع الطلب:* 🛍️ تيك أواي (استلام من المطعم)\n`;
+    if (orderDetails.customerName) {
+      message += `👤 *اسم المستلم:* ${orderDetails.customerName}\n`;
+    }
+    if (orderDetails.customerPhone) {
+      message += `📞 *رقم التليفون:* ${orderDetails.customerPhone}\n`;
+    }
+    const finalPickupTime =
+      orderDetails.pickupTime === 'تحديد يدوي'
+        ? orderDetails.customPickupTime || 'وقت مخصص'
+        : orderDetails.pickupTime || 'بعد ساعة';
+    message += `⏰ *وقت الاستلام:* ${finalPickupTime}\n`;
+  } else {
+    message += `📍 *نوع الطلب:* 🛵 دليفري (توصيل منازل)\n`;
+    if (orderDetails.customerName) {
+      message += `👤 *اسم المستلم:* ${orderDetails.customerName}\n`;
+    }
+    if (orderDetails.customerPhone) {
+      message += `📞 *رقم التليفون:* ${orderDetails.customerPhone}\n`;
+    }
+    if (orderDetails.deliveryAddress) {
+      message += `🏠 *العنوان بالتفصيل:* ${orderDetails.deliveryAddress}\n`;
+    }
+    message += `🚚 *ثمن التوصيل:* سوف يتم تحديده والتأكيد معكم حسب العنوان\n`;
   }
 
   message += `━━━━━━━━━━━━━━━━━━━━━\n`;
@@ -58,7 +75,6 @@ export function generateWhatsAppMessage(
   }
   message += `💰 *إجمالي الفاتورة:* *${totalPrice} ${RESTAURANT_INFO.currency}*\n`;
   message += `━━━━━━━━━━━━━━━━━━━━━\n`;
-  message += `✨ شكراً لاختياركم *${RESTAURANT_INFO.name}*!`;
 
   return message;
 }

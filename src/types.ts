@@ -36,9 +36,11 @@ export type OrderType = 'hall' | 'takeaway' | 'delivery';
 export interface OrderDetails {
   orderType: OrderType;
   tableNumber: string;
-  customerName: string;
-  customerPhone: string;
-  deliveryAddress: string;
+  customerName: string; // اسم المستلم
+  customerPhone: string; // رقم التليفون
+  deliveryAddress: string; // العنوان بالتفصيل للدليفري
+  pickupTime: string; // 'بعد نصف ساعة' | 'بعد ساعة' | 'بعد ساعتين' | 'تحديد يدوي'
+  customPickupTime?: string; // التوقيت المكتوب يدوياً
   notes: string;
 }
 

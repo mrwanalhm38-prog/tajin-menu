@@ -92,10 +92,19 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-stone-600">•</span>
                 <span className="text-amber-400/90 font-medium">مشويات على الفحم وأطباق بلدية</span>
               </p>
-              <p className="text-[11px] text-stone-500 mt-0.5 flex items-center gap-1 justify-center sm:justify-start">
-                <MapPin className="w-3 h-3 text-amber-600/70" />
-                {RESTAURANT_INFO.address}
-              </p>
+              <a
+                href={RESTAURANT_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-stone-400 hover:text-amber-400 mt-1 flex items-center gap-1.5 justify-center sm:justify-start group transition-colors select-none"
+                title="اضغط لفتح موقع المطعم في خدمة خرائط Google"
+              >
+                <MapPin className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                <span className="group-hover:underline underline-offset-2">{RESTAURANT_INFO.address}</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-sans">
+                  خرائط Google ↗
+                </span>
+              </a>
             </div>
           </div>
 

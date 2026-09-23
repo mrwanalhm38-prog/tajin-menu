@@ -756,6 +756,7 @@ export const RESTAURANT_INFO = {
   phone: '01000229291',
   whatsappNumber: '201000229291', // For international WhatsApp link
   address: 'كورنيش النيل امام سور النادي الرياضي بجوار جيم ال VIB',
+  googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('مطعم طاجين كورنيش النيل امام سور النادي الرياضي بجوار جيم ال VIB'),
   workingHours: 'يومياً من 12:00 ظهراً حتى 02:00 صباحاً',
   currency: 'ج.م',
   developer: {

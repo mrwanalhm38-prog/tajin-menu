@@ -31,11 +31,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQr }) => {
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl text-xs">
-          <div className="p-3.5 rounded-2xl bg-[#171412] border border-stone-800/80 flex flex-col items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-amber-500" />
-            <span className="font-semibold text-stone-200">العنوان</span>
-            <span className="text-stone-400">{RESTAURANT_INFO.address}</span>
-          </div>
+          <a
+            href={RESTAURANT_INFO.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 rounded-2xl bg-[#171412] hover:bg-[#1e1a17] border border-stone-800/80 hover:border-amber-500/40 flex flex-col items-center gap-1.5 transition-all group select-none"
+            title="فتح الموقع في خرائط Google"
+          >
+            <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+              <MapPin className="w-4 h-4" />
+            </div>
+            <span className="font-semibold text-stone-200 group-hover:text-amber-300 transition-colors">
+              العنوان
+            </span>
+            <span className="text-stone-400 leading-relaxed text-center">{RESTAURANT_INFO.address}</span>
+            <span className="text-[10px] text-amber-400 font-bold mt-0.5 underline">
+              خرائط Google ↗
+            </span>
+          </a>
 
           <div className="p-3.5 rounded-2xl bg-[#171412] border border-stone-800/80 flex flex-col items-center gap-1.5">
             <Clock className="w-4 h-4 text-amber-500" />

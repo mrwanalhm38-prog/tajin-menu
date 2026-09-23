@@ -7,6 +7,7 @@ import { ItemCustomizeModal } from './components/ItemCustomizeModal';
 import { QrModal } from './components/QrModal';
 import { Footer } from './components/Footer';
 import { BackgroundWatermark } from './components/BackgroundWatermark';
+import { OrderTypeSelector } from './components/OrderTypeSelector';
 import { CATEGORIES, MENU_ITEMS, RESTAURANT_INFO } from './data/menuData';
 import { CategoryId, MenuItem, PriceOption, CartItem, OrderDetails } from './types';
 import { ShoppingBag, ChevronLeft, Sparkles, Coffee } from 'lucide-react';
@@ -44,6 +45,8 @@ export default function App() {
       customerName: '',
       customerPhone: '',
       deliveryAddress: '',
+      pickupTime: 'بعد ساعة',
+      customPickupTime: '',
       notes: '',
     };
   });
@@ -361,7 +364,24 @@ export default function App() {
 
       {/* Floating Bottom Cart Bar (Appears when cart has items) */}
       {cartItems.length > 0 && !isCartOpen && (
-        <div className="fixed bottom-3 inset-x-0 z-40 px-4 max-w-lg mx-auto animate-bounce-subtle">
+        <div className="fixed bottom-3 inset-x-0 z-40 px-3 sm:px-4 max-w-lg mx-auto flex flex-col gap-2">
+          {/* Chic 3-option Order Type Selector (صالة - دليفري - تيك أواي) */}
+          <div className="bg-[#141210]/95 backdrop-blur-md px-3 py-2 rounded-2xl border border-amber-600/40 shadow-2xl flex items-center justify-between gap-2.5">
+            <span className="text-xs font-bold text-amber-200 font-alexandria shrink-0">
+              نوع الطلب:
+            </span>
+            <div className="flex-1">
+              <OrderTypeSelector
+                selectedType={orderDetails.orderType}
+                onChange={(type) =>
+                  setOrderDetails((prev) => ({ ...prev, orderType: type }))
+                }
+                compact
+              />
+            </div>
+          </div>
+
+          {/* Main Checkout Button */}
           <button
             onClick={() => setIsCartOpen(true)}
             type="button"
@@ -373,7 +393,9 @@ export default function App() {
                 {totalCartCount}
               </div>
               <div className="text-right">
-                <span className="text-xs font-black block leading-tight">سلة الطلبات جاهزة</span>
+                <span className="text-xs font-black block leading-tight">
+                  طلب {orderDetails.orderType === 'hall' ? 'صالة' : orderDetails.orderType === 'delivery' ? 'دليفري' : 'تيك أواي'} جاهز
+                </span>
                 <span className="text-[11px] font-bold text-stone-900 opacity-90">
                   اضغط لإتمام الطلب بالواتساب
                 </span>

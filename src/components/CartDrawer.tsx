@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CartItem, OrderDetails, OrderType } from '../types';
 import { RESTAURANT_INFO } from '../data/menuData';
 import { openWhatsAppOrder, generateWhatsAppMessage } from '../utils/whatsapp';
+import { OrderTypeSelector } from './OrderTypeSelector';
 import {
   X,
   Trash2,
@@ -11,10 +12,14 @@ import {
   Copy,
   Check,
   MapPin,
-  Utensils,
   ShoppingBag,
-  Bike,
   Sparkles,
+  Utensils,
+  User,
+  Phone,
+  Clock,
+  Bike,
+  Heart,
 } from 'lucide-react';
 
 interface CartDrawerProps {
@@ -119,94 +124,235 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
             ) : (
               <>
-                {/* Order Type Selection */}
-                <div className="p-3 rounded-2xl bg-[#1b1714] border border-stone-800">
-                  <span className="block text-xs font-semibold text-stone-300 mb-2">
-                    طريقة استلام الطلب:
-                  </span>
-                  <div className="grid grid-cols-3 gap-1.5">
-                    {[
-                      { type: 'hall' as OrderType, label: 'داخل الصالة', icon: Utensils },
-                      { type: 'takeaway' as OrderType, label: 'تيك أواي', icon: ShoppingBag },
-                      { type: 'delivery' as OrderType, label: 'دليفري', icon: Bike },
-                    ].map(({ type, label, icon: Icon }) => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => onUpdateOrderDetails({ orderType: type })}
-                        className={`py-2 px-1 rounded-xl text-xs font-medium flex flex-col items-center gap-1 border transition-all ${
-                          orderDetails.orderType === type
-                            ? 'bg-amber-500 text-stone-950 font-bold border-amber-400 shadow'
-                            : 'bg-stone-900 border-stone-800 text-stone-400 hover:text-stone-200'
-                        }`}
-                      >
-                        <Icon className="w-4 h-4" />
-                        <span>{label}</span>
-                      </button>
-                    ))}
-                  </div>
+                {/* Order Type Selection with modern chic design */}
+                <div className="p-3.5 rounded-2xl bg-[#1a1613] border border-amber-900/40 shadow-lg space-y-3.5">
+                  <OrderTypeSelector
+                    selectedType={orderDetails.orderType}
+                    onChange={(type) => onUpdateOrderDetails({ orderType: type })}
+                  />
 
-                  {/* Contextual fields based on Order Type */}
-                  {orderDetails.orderType === 'hall' && (
-                    <div className="mt-3">
-                      <label className="block text-[11px] text-stone-400 mb-1">
-                        رقم الطاولة:
-                      </label>
-                      <input
-                        type="text"
-                        value={orderDetails.tableNumber}
-                        onChange={(e) => onUpdateOrderDetails({ tableNumber: e.target.value })}
-                        placeholder="مثال: 5 أو 12"
-                        className="w-full px-3 py-1.5 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none"
-                      />
-                    </div>
-                  )}
-
+                  {/* ================= DELIVERY SECTION ================= */}
                   {orderDetails.orderType === 'delivery' && (
-                    <div className="mt-3 space-y-2">
+                    <div className="pt-3 border-t border-stone-800/80 space-y-3">
+                      {/* Name and Phone */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                          <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                            <User className="w-3.5 h-3.5 text-amber-400" />
+                            <span>اسم المستلم:</span>
+                            <span className="text-amber-500 text-[10px]">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={orderDetails.customerName}
+                            onChange={(e) => onUpdateOrderDetails({ customerName: e.target.value })}
+                            placeholder="الاسم الكريم أو الثلاثي"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none transition-colors"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                            <Phone className="w-3.5 h-3.5 text-amber-400" />
+                            <span>رقم التليفون:</span>
+                            <span className="text-amber-500 text-[10px]">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            value={orderDetails.customerPhone}
+                            onChange={(e) => onUpdateOrderDetails({ customerPhone: e.target.value })}
+                            placeholder="010XXXXXXXX"
+                            dir="ltr"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none text-right transition-colors"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Detailed Address */}
                       <div>
-                        <label className="block text-[11px] text-stone-400 mb-1">
-                          عنوان التوصيل بالتفصيل:
+                        <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                          <span>العنوان بالتفصيل:</span>
+                          <span className="text-amber-500 text-[10px]">*</span>
                         </label>
-                        <input
-                          type="text"
+                        <textarea
+                          rows={2}
                           value={orderDetails.deliveryAddress}
                           onChange={(e) => onUpdateOrderDetails({ deliveryAddress: e.target.value })}
-                          placeholder="المنطقة، الشارع، رقم العمارة، الشقة..."
-                          className="w-full px-3 py-1.5 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none"
+                          placeholder="المنطقة، الشارع، رقم العمارة، الطابق، الشقة، علامة مميزة..."
+                          className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none transition-colors resize-none leading-relaxed"
                         />
+                      </div>
+
+                      {/* Delivery fee note */}
+                      <div className="p-3 rounded-xl bg-gradient-to-r from-amber-950/40 via-stone-900 to-amber-950/40 border border-amber-600/40 flex items-center gap-2.5 shadow-sm">
+                        <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0">
+                          <Bike className="w-4 h-4 text-amber-400" />
+                        </div>
+                        <div className="text-right">
+                          <span className="block text-xs font-bold text-amber-300">
+                            🛵 سوف يتم تحديد ثمن التوصيل
+                          </span>
+                          <span className="text-[11px] text-stone-400">
+                            يتم احتساب تكلفة التوصيل بدقة حسب العنوان والتأكيد معكم عبر الواتساب.
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Thank you message from Tajin */}
+                      <div className="p-3 rounded-xl bg-[#14110e] border border-amber-500/25 text-center relative overflow-hidden shadow-inner">
+                        <p className="text-xs font-bold text-amber-300 font-alexandria">
+                          أسرة طاجين تشكركم لاختياركم لنا ❤️
+                        </p>
                       </div>
                     </div>
                   )}
 
-                  {/* Customer Info */}
-                  <div className="mt-3 grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-[11px] text-stone-400 mb-1">
-                        اسم العميل (اختياري):
-                      </label>
-                      <input
-                        type="text"
-                        value={orderDetails.customerName}
-                        onChange={(e) => onUpdateOrderDetails({ customerName: e.target.value })}
-                        placeholder="الاسم الكريم"
-                        className="w-full px-3 py-1.5 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none"
-                      />
+                  {/* ================= TAKEAWAY SECTION ================= */}
+                  {orderDetails.orderType === 'takeaway' && (
+                    <div className="pt-3 border-t border-stone-800/80 space-y-3">
+                      {/* Name and Phone */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                          <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                            <User className="w-3.5 h-3.5 text-amber-400" />
+                            <span>اسم المستلم:</span>
+                            <span className="text-amber-500 text-[10px]">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={orderDetails.customerName}
+                            onChange={(e) => onUpdateOrderDetails({ customerName: e.target.value })}
+                            placeholder="الاسم الكريم أو الثلاثي"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none transition-colors"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                            <Phone className="w-3.5 h-3.5 text-amber-400" />
+                            <span>رقم التليفون:</span>
+                            <span className="text-amber-500 text-[10px]">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            value={orderDetails.customerPhone}
+                            onChange={(e) => onUpdateOrderDetails({ customerPhone: e.target.value })}
+                            placeholder="010XXXXXXXX"
+                            dir="ltr"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none text-right transition-colors"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Pickup Time Selection */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-amber-300/90 mb-1.5 flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-amber-400" />
+                          <span>وقت الاستلام من المطعم:</span>
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                          {['بعد نصف ساعة', 'بعد ساعة', 'بعد ساعتين', 'تحديد يدوي'].map((timeOption) => {
+                            const isSelected = orderDetails.pickupTime === timeOption;
+                            return (
+                              <button
+                                key={timeOption}
+                                type="button"
+                                onClick={() => onUpdateOrderDetails({ pickupTime: timeOption })}
+                                className={`py-2 px-1.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 border transition-all active:scale-95 ${
+                                  isSelected
+                                    ? 'bg-amber-500 text-stone-950 font-bold border-amber-400 shadow-md ring-1 ring-amber-300'
+                                    : 'bg-stone-900 text-stone-300 hover:text-amber-200 border-stone-800 hover:border-amber-600/40'
+                                }`}
+                              >
+                                <span>{timeOption}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Custom manual time input */}
+                        {orderDetails.pickupTime === 'تحديد يدوي' && (
+                          <div className="mt-2">
+                            <input
+                              type="text"
+                              value={orderDetails.customPickupTime || ''}
+                              onChange={(e) => onUpdateOrderDetails({ customPickupTime: e.target.value })}
+                              placeholder="اكتب وقت الاستلام المفضل يدوياً (مثال: الساعة 7:30 مساءً)"
+                              className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-amber-500/60 text-stone-200 text-xs focus:border-amber-400 focus:outline-none placeholder:text-stone-500 shadow-sm"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Thank you message from Tajin */}
+                      <div className="p-3 rounded-xl bg-[#14110e] border border-amber-500/25 text-center relative overflow-hidden shadow-inner">
+                        <p className="text-xs font-bold text-amber-300 font-alexandria">
+                          أسرة طاجين تشكركم لاختياركم لنا ❤️
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-stone-400 mb-1">
-                        رقم الهاتف:
-                      </label>
-                      <input
-                        type="tel"
-                        value={orderDetails.customerPhone}
-                        onChange={(e) => onUpdateOrderDetails({ customerPhone: e.target.value })}
-                        placeholder="010XXXXXXXX"
-                        dir="ltr"
-                        className="w-full px-3 py-1.5 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none text-right"
-                      />
+                  )}
+
+                  {/* ================= HALL / DINE-IN SECTION ================= */}
+                  {orderDetails.orderType === 'hall' && (
+                    <div className="pt-3 border-t border-stone-800/80 space-y-3">
+                      {/* Table Number */}
+                      <div>
+                        <label className="block text-[11px] font-bold text-amber-300/90 mb-1 flex items-center gap-1">
+                          <Utensils className="w-3.5 h-3.5 text-amber-400" />
+                          <span>رقم الطاولة في الصالة:</span>
+                          <span className="text-amber-500 text-[10px]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={orderDetails.tableNumber}
+                          onChange={(e) => onUpdateOrderDetails({ tableNumber: e.target.value })}
+                          placeholder="مثال: طاولة 5 أو 12"
+                          className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none"
+                        />
+                      </div>
+
+                      {/* Name and Phone */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                          <label className="block text-[11px] font-bold text-stone-400 mb-1 flex items-center gap-1">
+                            <User className="w-3.5 h-3.5 text-stone-400" />
+                            <span>اسم العميل (اختياري):</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={orderDetails.customerName}
+                            onChange={(e) => onUpdateOrderDetails({ customerName: e.target.value })}
+                            placeholder="الاسم الكريم"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold text-stone-400 mb-1 flex items-center gap-1">
+                            <Phone className="w-3.5 h-3.5 text-stone-400" />
+                            <span>رقم الهاتف (اختياري):</span>
+                          </label>
+                          <input
+                            type="tel"
+                            value={orderDetails.customerPhone}
+                            onChange={(e) => onUpdateOrderDetails({ customerPhone: e.target.value })}
+                            placeholder="010XXXXXXXX"
+                            dir="ltr"
+                            className="w-full px-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-xs focus:border-amber-500 focus:outline-none text-right"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Thank you message from Tajin */}
+                      <div className="p-3 rounded-xl bg-[#14110e] border border-amber-500/25 text-center relative overflow-hidden shadow-inner">
+                        <p className="text-xs font-bold text-amber-300 font-alexandria">
+                          أسرة طاجين تشكركم لاختياركم لنا ❤️
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Items List */}
