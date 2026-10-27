@@ -21,6 +21,8 @@ export interface MenuItem {
   badge?: string; // e.g. "الأكثر طلباً", "توقيع طاجين", "مميز", "جديد"
   isSpicy?: boolean;
   preparationTime?: string;
+  /** Optional official dish photo URL; leave empty until a verified photo is available. */
+  imageUrl?: string;
 }
 
 export interface CartItem {
