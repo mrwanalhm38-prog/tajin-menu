@@ -38,3 +38,120 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+/* Tajin premium UX refresh — warm clay, brass and cream */
+:root {
+  color-scheme: dark;
+  --tajin-clay: #9f3428;
+  --tajin-clay-bright: #c24b37;
+  --tajin-brass: #d8ad63;
+  --tajin-cream: #f5ead8;
+  --tajin-ink: #100d0b;
+  --tajin-panel: #191411;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+body {
+  background:
+    radial-gradient(ellipse at 50% -12%, rgba(159,52,40,.16), transparent 42%),
+    linear-gradient(180deg, #100d0b 0%, #120f0d 55%, #0d0b09 100%);
+  color: var(--tajin-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: rgba(216,173,99,.34); color: #fff8eb; }
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+button { touch-action: manipulation; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--tajin-brass);
+  outline-offset: 3px;
+}
+header {
+  isolation: isolate;
+}
+header h1 { text-wrap: balance; }
+header .rounded-2xl:has(input) {
+  box-shadow: 0 12px 34px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.025);
+}
+nav.sticky {
+  box-shadow: 0 10px 30px rgba(0,0,0,.22);
+  border-color: rgba(216,173,99,.18);
+}
+nav.sticky button {
+  min-height: 42px;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+nav.sticky button:active { transform: scale(.97); }
+.menu-grid, .grid { min-width: 0; }
+.menu-card, [class*="rounded-2xl"][class*="border-stone-800"] {
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.group:hover {
+  border-color: rgba(216,173,99,.42);
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover { transform: translateY(-3px); }
+}
+button, a { transition-timing-function: cubic-bezier(.2,.7,.2,1); }
+button:active { filter: brightness(1.08); }
+input, textarea, select {
+  color-scheme: dark;
+}
+input::placeholder, textarea::placeholder { opacity: .78; }
+img { max-width: 100%; }
+.tajin-food-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(159,52,40,.2), rgba(216,173,99,.07)), #211914;
+  border: 1px solid rgba(216,173,99,.14);
+  aspect-ratio: 16 / 9;
+  margin-bottom: 14px;
+}
+.tajin-food-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), filter .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .tajin-food-photo img { transform: scale(1.045); }
+}
+.tajin-photo-placeholder {
+  min-height: 132px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #c7a36b;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(194,75,55,.22), transparent 55%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.018) 0 1px, transparent 1px 9px),
+    #211914;
+  text-align: center;
+  font-size: 11px;
+}
+.tajin-photo-placeholder svg { width: 28px; height: 28px; opacity: .85; }
+.tajin-photo-placeholder small { color: #9f8c78; font-size: 10px; }
+@keyframes tajin-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+main .group { animation: tajin-card-in .38s both; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+@media (max-width: 640px) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  nav.sticky { padding-inline: 10px; }
+  .tajin-food-photo { border-radius: 12px; }
+}
