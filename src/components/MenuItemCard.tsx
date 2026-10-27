@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuItem, PriceOption, CartItem } from '../types';
 import { RESTAURANT_INFO } from '../data/menuData';
-import { Plus, Minus, Check, MessageSquarePlus, Clock } from 'lucide-react';
+import { Plus, Minus, Check, MessageSquarePlus, Clock, UtensilsCrossed } from 'lucide-react';
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -22,6 +22,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
   const defaultOption = item.options.find((o) => o.isDefault) || item.options[0];
   const [selectedOption, setSelectedOption] = useState<PriceOption>(defaultOption);
   const [isAddedFeedback, setIsAddedFeedback] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
 
   // Check if this specific item + option is in cart
   const currentCartId = `${item.id}-${selectedOption.id}`;
@@ -36,6 +37,24 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   return (
     <div className="group relative bg-gradient-to-b from-[#181512] to-[#13110f] rounded-2xl border border-stone-800/80 hover:border-amber-500/40 p-4 transition-all duration-200 shadow-md hover:shadow-xl hover:shadow-amber-950/20 flex flex-col justify-between">
+      {/* Verified dish photo slot: only show a photo when an official URL is supplied. */}
+      <div className="tajin-food-photo" aria-label={item.imageUrl && !imageFailed ? `صورة ${item.arabicName}` : `مكان صورة ${item.arabicName}`}>
+        {item.imageUrl && !imageFailed ? (
+          <img
+            src={item.imageUrl}
+            alt={`صورة ${item.arabicName}`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <div className="tajin-photo-placeholder">
+            <UtensilsCrossed aria-hidden="true" />
+            <span>صورة الطبق</span>
+            <small>تُضاف الصورة الأصلية عند توفرها</small>
+          </div>
+        )}
+      </div>
       {/* Top row: Name, Badge, Time */}
       <div>
         <div className="flex items-start justify-between gap-2 mb-1.5">
